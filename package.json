@@ -1,0 +1,30 @@
+{
+  "name": "gator-bytes",
+  "version": "1.0.0",
+  "description": "Sources:",
+  "homepage": "https://github.com/gburger5/SWE-Project#readme",
+  "bugs": {
+    "url": "https://github.com/gburger5/SWE-Project/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gburger5/SWE-Project.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "setup": "npm ci",
+    "compile": "tsc",
+    "test": "",
+    "server": "node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "ts-node": "^10.9.2",
+    "@types/dotenv": "^6.1.1",
+    "typescript": "^5.7.3"
+  }
+}
