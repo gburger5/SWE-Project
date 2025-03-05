@@ -46,15 +46,18 @@ Once you have downloaded the repository, in the top right of the explorer menu c
 
 Then, navigate to the bottom of the explorer:
 
-![image](https://github.com/user-attachments/assets/45b97c69-be46-4c4d-8f55-cc4d957dc2d0)
+![image](https://github.com/user-attachments/assets/2265d680-492f-4e0c-8b53-3f7d1ca92d70)
+
 
 You can run the NPM scripts from here. They do the following things:
-- clean-install: Performs a clean install of dependencies.
-- setup: Performs a regular install of dependencies (Must be used if package.json & package-lock.json aren't synced)
-- win-build: Creates a dist folder which contains a copy of the project's architecture. Compiles all typescript files, and copies over /views,  the .env and any plain javascript files.
-- start: Starts the webserver.
-- win-build & start: self explanatory
-- test: Nothing yet
+- **clean-install:** Performs a clean install of dependencies.
+- **setup:** Performs a regular install of dependencies (Must be used if package.json & package-lock.json aren't synced)
+- **linux-build:** Same as win-build but for linux
+- **win-build:** Creates a dist folder which contains a copy of the project's architecture. Compiles all typescript files, and copies over /views,  the .env and any plain javascript files.
+- **start:** Starts the webserver.
+- **win-build & start:** self explanatory
+- **linux-build & start:** self explanatory
+- **test:** Nothing yet
 
 Sources:
 

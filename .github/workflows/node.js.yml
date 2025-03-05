@@ -27,5 +27,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
-    - run: npm run linux-build --if-present
+    - run: |
+        cp config/.env.example config/.env
+        npm run linux-build --if-present
     - run: npm test

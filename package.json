@@ -17,9 +17,11 @@
   "scripts": {
     "clean-install": "npm ci",
     "setup": "npm install",
+    "linux-build": "npm run setup && tsc && rsync -av views/ dist/views/ && rsync -av config/.env dist/config/",
     "win-build": "npm run setup && tsc && robocopy views dist/views /E && robocopy config dist/config .env",
     "start": "node ./dist/server.js",
     "win-build & start": "npm run win-build && npm run start",
+    "linux-build & start": "npm run linux-build && npm run start",
     "test": ""
   },
   "dependencies": {
