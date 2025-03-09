@@ -4,6 +4,7 @@ const app = express();
 const homeRoutes = require('./routes/home');
 const IDERoutes = require('./routes/IDE');
 const loginRoutes = require('./routes/login');
+const problemRoutes = require('./routes/problem');
 
 import AppDataSource from './models/data-source'
 
@@ -26,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'views', 'static')));
 app.use('/', loginRoutes);
 app.use('/home', homeRoutes);
 app.use('/IDE', IDERoutes);
+app.use(problemRoutes);
 
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);

@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<title>GatorBytes</title>
@@ -6,18 +7,17 @@
 <body>
 
 <h1>GatorBytes</h1>
+	<div id="ide">
+		<div id="editor"></div>
 
-<div id="editor"></div>
+		<div id="interaction-container">
+			<button id = "run-code" type="button" onclick="runCode()">run code</button>
+			<select id="language-dropdown"></select>
+		</div>
 
-<div id="interaction-container">
-	<button id = "run-code" type="button" onclick="runCode()">run code</button>
-	<select id="language-dropdown"></select>
-</div>
-
-<pre id="output"></pre>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
-<script src="IDE.js"></script>
-
+		<pre id="output"></pre>
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
+	<script src="IDE.js"></script>
 </body>
 </html>
