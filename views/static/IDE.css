@@ -6,7 +6,7 @@
 	height: 500px;
 }
 
-#interaction-container {
+.interaction-container {
 	display: flex;
 	gap: 10px;
 	
@@ -23,14 +23,17 @@
 	padding: 5px;
 }
 
-#output {
+#in-out {
 	position: relative;
 	top: 10px;
 	left: 30px;
 	width: 1000px;
-	height: 200px;
+}
+
+#output {
 	overflow: auto;
 	border: 1px solid #ccc;
 	white-space: pre-wrap;
 	word-wrap: break-word;
+	height: 200px;
 }

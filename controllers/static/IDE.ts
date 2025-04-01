@@ -6,11 +6,16 @@ interface Filters {
 	execute: boolean;
 }
 
+interface ExecuteParameters {
+	stdin: string;
+}
+
 interface CompilerRequest {
 	compiler: string;
 	options: {
 		compilerOptions: CompilerOptions;
 		filters: Filters;
+		executeParameters?: ExecuteParameters;
 	};
 	lang: string;
 	allowStoreCodeDebug: boolean;
@@ -92,13 +97,11 @@ function populateLanguageDropdown() {
 	}
 }
 
-async function runCode(): Promise<void> {
+async function runCode(input: string, target: HTMLElement, trimCredits: boolean): Promise<void> {
 	request.source = editor.getValue();
-	const outputElement = document.getElementById("output");
-	const runCodeButton = document.getElementById("run-code") as HTMLInputElement;
+	request.options.executeParameters = {stdin: input};
 	
-	outputElement.textContent = "";
-	runCodeButton.disabled = true;
+	target.textContent = "";
 	
 	fetch(executionURL, 
 	{
@@ -113,14 +116,48 @@ async function runCode(): Promise<void> {
 		return response.text();
 	})
 	.then(data => {
-		if (outputElement) {
-			outputElement.textContent = data;
+		if (target) {
+			if (trimCredits) {
+				data = data.split('\n').slice(3).join('\n');
+			}
+			target.textContent = data;
 		}
 	})
 	.catch(error => {
 		console.error('Error:', error);
 	});
+}
+
+async function runUserCode() {
+	const executionButtons = document.getElementsByClassName('execution-request');
+	for (var i = 0; i < executionButtons.length; i++) {
+		(executionButtons[i] as HTMLButtonElement).disabled = true;
+	}
 	
+	await runCode((document.getElementById('input-text') as HTMLTextAreaElement).value, document.getElementById('output'), false);
 	await new Promise(resolve => setTimeout(resolve, 1500));
-	runCodeButton.disabled = false;
+	for (var i = 0; i < executionButtons.length; i++) {
+		(executionButtons[i] as HTMLButtonElement).disabled = false;
+	}
+}
+
+async function runTests() {
+	const executionButtons = document.getElementsByClassName('execution-request');
+	for (var i = 0; i < executionButtons.length; i++) {
+		(executionButtons[i] as HTMLButtonElement).disabled = true;
+	}
+	
+	const testTable = document.getElementById('test-case-table') as HTMLTableElement;
+	var promises = [];
+	for (var i = 1, row; row = testTable.rows[i]; i++) {
+		const input = row.cells[0].textContent;
+		const target = row.cells[2];
+		promises.push(runCode(input, target, true));
+	}
+	
+	await Promise.allSettled(promises);
+	await new Promise(resolve => setTimeout(resolve, 1500));
+	for (var i = 0; i < executionButtons.length; i++) {
+		(executionButtons[i] as HTMLButtonElement).disabled = false;
+	}
 }

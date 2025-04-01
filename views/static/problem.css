@@ -1,0 +1,12 @@
+#test-cases table {
+	border: 1px solid #AAAAAA;
+}
+
+#test-cases table tr td {
+	width: 300px;
+	white-space: pre-wrap;
+}
+
+#test-cases table tr td:hover {
+	background-color: #EEEEEE;
+}

@@ -1,6 +1,11 @@
 interface Problem {
-    title: string;
-    content: string;
+	title: string;
+	category: string;
+	content: string;
+	tests: {
+		inputs: string[];
+		outputs: string[];
+	};
 }
 
 if(window.location.pathname == '/problem') {
@@ -15,6 +20,7 @@ async function loadProblem() {
 	
 	if (problemID) {
 		try {
+			// fetch problem from problems.json
 			const response = await fetch('/problems.json');
 			
 			if (!response.ok) {
@@ -27,6 +33,39 @@ async function loadProblem() {
 			
 			document.getElementById('title').innerHTML = problem.title;
 			document.getElementById('content').innerHTML = problem.content;
+			
+			// add test cases
+			const table = document.getElementById('test-case-table') as HTMLElement;
+			
+			const headerRow = document.createElement('tr');
+			const inputHeader = document.createElement('th');
+			inputHeader.textContent = 'Input';
+			const expectedOutputHeader = document.createElement('th');
+			expectedOutputHeader.textContent = 'Expected Output';
+			const userOutputHeader = document.createElement('th');
+			userOutputHeader.textContent = 'User Output';
+			
+			headerRow.appendChild(inputHeader);
+			headerRow.appendChild(expectedOutputHeader);
+			headerRow.appendChild(userOutputHeader);
+			table.appendChild(headerRow);
+			
+			for (let i = 0; i < problem.tests.inputs.length; i++) {
+				const row = document.createElement('tr');
+
+				const inputCell = document.createElement('td');
+				inputCell.textContent = problem.tests.inputs[i];
+
+				const expectedOutputCell = document.createElement('td');
+				expectedOutputCell.textContent = problem.tests.outputs[i];
+
+				row.appendChild(inputCell);
+				row.appendChild(expectedOutputCell);
+				row.appendChild(document.createElement('td'));
+
+				table.appendChild(row);	
+			}
+			
 		} catch (error) {
 			console.error('Error loading data:', error);
 		}
